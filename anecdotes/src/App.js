@@ -20,9 +20,6 @@ const App = () => {
   const [votes, setVotes] = useState(points)
   const [best, setBest] = useState(0);
 
-  
-
-
  const handlePoints = () => {
     const copy = [...votes];
     copy[selected] += 1;
@@ -30,13 +27,11 @@ const App = () => {
     setVotes(copy);
     let highest = getMostVotedAnecdote(arr);
     setBest(highest);
-    
  }
  
 
   const generateNumber = () => {
     let number = Math.floor((Math.random() * 8) +0);
-
     return setSelected(number);
   }
 

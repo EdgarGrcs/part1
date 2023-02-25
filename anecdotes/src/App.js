@@ -21,26 +21,27 @@ const App = () => {
   const [best, setBest] = useState(0);
 
   
-//figure out why the most voted one doesnt update
+
 
  const handlePoints = () => {
     const copy = [...votes];
     copy[selected] += 1;
+    let arr = [...copy];
     setVotes(copy);
-    
-    let highest = getMostVotedAnecdote();
+    let highest = getMostVotedAnecdote(arr);
     setBest(highest);
+    
  }
  
 
   const generateNumber = () => {
     let number = Math.floor((Math.random() * 8) +0);
+
     return setSelected(number);
   }
 
-  const getMostVotedAnecdote = () => {
-
-   const arr = votes.indexOf(Math.max(...votes)); 
+  const getMostVotedAnecdote = (array) => {
+   const arr = array.indexOf(Math.max(...array)); 
    return arr;
   }
   
@@ -55,7 +56,7 @@ const App = () => {
       <button onClick={() => generateNumber()}>next anecdote</button>
       </div>
       <h1>Anecdote with most votes</h1>
-      {anecdotes[best]}
+      {anecdotes[best]} 
       <div>has { votes[best]} {votes[best] === 1 ? "vote" : "votes" }</div>
     </div>
   )

@@ -11,25 +11,52 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
-   
+  
+  
+  const points = [0,0,0,0,0,0,0,0];
+
+
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(points)
+  const [best, setBest] = useState(0);
+
+  
+//figure out why the most voted one doesnt update
+
+ const handlePoints = () => {
+    const copy = [...votes];
+    copy[selected] += 1;
+    setVotes(copy);
+    
+    let highest = getMostVotedAnecdote();
+    setBest(highest);
+ }
+ 
 
   const generateNumber = () => {
-
     let number = Math.floor((Math.random() * 8) +0);
     return setSelected(number);
   }
 
+  const getMostVotedAnecdote = () => {
 
-
-
+   const arr = votes.indexOf(Math.max(...votes)); 
+   return arr;
+  }
+  
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
+      <div>has { votes[selected]} {votes[selected] === 1 ? "vote" : "votes" }</div>
       <div>
+      <button onClick={() => handlePoints()}>vote</button>
       <button onClick={() => generateNumber()}>next anecdote</button>
       </div>
+      <h1>Anecdote with most votes</h1>
+      {anecdotes[best]}
+      <div>has { votes[best]} {votes[best] === 1 ? "vote" : "votes" }</div>
     </div>
   )
 }
